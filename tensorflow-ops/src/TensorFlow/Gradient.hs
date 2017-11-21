@@ -693,10 +693,10 @@ opGrad "AvgPool" nodeDef [toT -> x] [dz] =
                     . (opAttr "strides" .~ strides)
                     . (opAttr "padding" .~ padding)
                     . (opAttr "data_format" .~ dataFormat))
-                output dz
+                (shape output) dz
     ]
   where
-    output :: Tensor Build Int32
+    output :: Tensor Build a
     output = toT $ Output 0 (nodeDefName nodeDef)
     ksize = lookupAttr nodeDef "ksize" :: [Int64]
     strides = lookupAttr nodeDef "strides" :: [Int64]
