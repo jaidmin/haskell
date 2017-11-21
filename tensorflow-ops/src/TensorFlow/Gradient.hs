@@ -687,6 +687,24 @@ opGrad "MaxPool" nodeDef [toT -> x] [dz] =
     padding = lookupAttr nodeDef "padding" :: ByteString
     dataFormat = lookupAttr nodeDef "data_format" :: ByteString
 
+opGrad "AvgPool" nodeDef [toT -> x] [dz] =
+    [ Just $ CoreOps.avgPoolGrad'
+                ((opAttr "ksize" .~ ksize)
+                    . (opAttr "strides" .~ strides)
+                    . (opAttr "padding" .~ padding)
+                    . (opAttr "data_format" .~ dataFormat))
+                x output dz
+    ]
+  where
+    output :: Tensor Build a
+    output = toT $ Output 0 (nodeDefName nodeDef)
+    ksize = lookupAttr nodeDef "ksize" :: [Int64]
+    strides = lookupAttr nodeDef "strides" :: [Int64]
+    padding = lookupAttr nodeDef "padding" :: ByteString
+    dataFormat = lookupAttr nodeDef "data_format" :: ByteString
+
+
+
 opGrad "Reshape" _ [toT -> x, _] [dz] =
     [Just $ reshape dz $ shape (x :: Tensor Build a), Nothing]
 
