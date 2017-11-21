@@ -814,7 +814,7 @@ numOutputs o =
         "Abs" -> 1
         "Add" -> 1
         "AddN" -> 1
-        "MaxPool" -> 1
+        "AvgPool" -> 1
         "Cast" -> 1
         "Const" -> 1
         "Concat" -> 1
