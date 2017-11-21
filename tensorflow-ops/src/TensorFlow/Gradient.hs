@@ -693,7 +693,7 @@ opGrad "AvgPool" nodeDef [toT -> x] [dz] =
                     . (opAttr "strides" .~ strides)
                     . (opAttr "padding" .~ padding)
                     . (opAttr "data_format" .~ dataFormat))
-                x output dz
+                output dz
     ]
   where
     output :: Tensor Build a
