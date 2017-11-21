@@ -771,6 +771,7 @@ opGrad "SparseSegmentSum" _ [toT -> x, toT -> y, toT -> t] [dz] =
 opGrad "LabelClasses" _ _ _ = [Nothing, Nothing]
 opGrad "LabelWeights" _ _ _ = [Nothing]
 opGrad "Size" _ _ _ = [Nothing]
+opGrad "Shape" _ _ _ = [Nothing]
 
 -- TODO (jcberentsen): Python implementation uses set_shape for
 -- static shape inference, which is unsupported.
@@ -845,6 +846,7 @@ numOutputs o =
         "ReluGrad" -> 1
         "Reshape" -> 1
         "Select" -> 1
+        "Shape" -> 1
         "Size" -> 1
         "SoftmaxCrossEntropyWithLogits" -> 2
         "Square" -> 1
